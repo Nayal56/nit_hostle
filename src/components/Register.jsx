@@ -1,214 +1,298 @@
-import React, { useState } from 'react';
 import './Register.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
+const Register = () => {
+  const [formData, setFormData] = useState({
+    rollNumber: '',
+    firstName: '',
+    lastName: '',
+    gender: '',
+    email: '',
+    mobile: '',
+    department: '',
+    branch: '',
+    year: '',
+    bloodGroup: '',
+    fathersName: '',
+    mothersName: '',
+    parentsMobileNumber: '',
+    permanentAddress: '',
+    password: '',
+    confirmPassword: ''
+  });
 
-function RegistrationForm() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [rollNo, setRollNo] = useState('');
-  const [department, setDepartment] = useState('');
-  const [branch, setBranch] = useState('');
-  const [year, setYear] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [email, setEmail] = useState('');
-  const [bloodGroup, setBloodGroup] = useState('');
-  const [fatherName, setFatherName] = useState('');
-  const [motherName, setMotherName] = useState('');
-  const [parentMobile, setParentMobile] = useState('');
-  const [permanentAdress, setPermanentAddress] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
+    const resetForm = () => {
+    setFormData({
+      rollNumber: '',
+      firstName: '',
+      lastName: '',
+      gender: '',
+      email: '',
+      mobile: '',
+      department: '',
+      branch: '',
+      year: '',
+      bloodGroup: '',
+      fathersName: '',
+      mothersName: '',
+      parentsMobileNumber: '',
+      permanentAddress: '',
+      password: '',
+      confirmPassword: ''
+    });
   };
 
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
+  const validateForm = () => {
+    let errors = {};
+    const rollNumberRegex = /^\d{6}$/;
+    const nameRegex = /^[a-zA-Z ]+$/;
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    const mobileRegex = /^\d{10}$/;
+    const parentsMobileRegex = /^\d{10}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+    if (!formData.rollNumber || !rollNumberRegex.test(formData.rollNumber)) {
+      errors.rollNumber = "Please enter a valid 6 digit roll number";
+    }
+    
+    if (!formData.firstName || !nameRegex.test(formData.firstName)) {
+      errors.firstName = "Please enter a valid first name";
+    }
+    
+    if (!formData.lastName || !nameRegex.test(formData.lastName)) {
+      errors.lastName = "Please enter a valid last name";
+    }
+    
+    if (!formData.gender) {
+      errors.gender = "Please select a gender";
+    }
+    
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    
+    if (!formData.mobile || !mobileRegex.test(formData.mobile)) {
+      errors.mobile = "Please enter a valid 10 digit mobile number";
+    }
+    
+    if (!formData.department) {
+      errors.department = "Please select a department";
+    }
+    
+    if (!formData.branch) {
+      errors.branch = "Please select a branch";
+    }
+    
+    if (!formData.year) {
+      errors.year = "Please select a year";
+    }
+    
+    if (!formData.bloodGroup) {
+      errors.bloodGroup = "Please select a blood group";
+    }
+    
+    if (!formData.fatherName || !nameRegex.test(formData.fatherName)) {
+      errors.fatherName = "Please enter a valid father's name";
+    }
+    
+    if (!formData.motherName || !nameRegex.test(formData.motherName)) {
+      errors.motherName = "Please enter a valid mother's name";
+    }
+    
+    if (!formData.parentsMobile || !parentsMobileRegex.test(formData.parentsMobile)) {
+      errors.parentsMobile = "Please enter a valid 10 digit mobile number for parents";
+    }
+    
+    if (!formData.address) {
+      errors.address = "Please enter a permanent address";
+    }
+    
+    if (!formData.password || !passwordRegex.test(formData.password)) {
+      errors.password = "Password must be at least 8 characters long and contain at least one letter and one number";
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+    
+    return errors;
+};
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submitted:', {
-      firstName,
-      lastName,
-      rollNo,
-      department,
-      branch,
-      year,
-      mobileNo,
-      email,
-      bloodGroup,
-      fatherName,
-      motherName,
-      parentMobile,
-      permanentAdress,
-      password,
-      confirmPassword
-    });
-    // Send data to server or do something else here
-  };
-
+    console.log(formData);
+    axios.post(`http://localhost:5000/api/students`, formData)    
+      .then(response => {
+        console.log(response.data);
+        resetForm();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };  
+  
+   
+  
   return (
-    <form onSubmit={this.handleSubmit} className="main-form">
-            <div className="row">
-              <div className="col-lg-8">
-                <div className="form-group">
-                  <label htmlFor="rollno">Roll Number</label>
-                  <input onChange={this.handleChange} type="text" className="form-control" id="Rollno" name="rollno" placeholder="Enter Your Roll Number" value={this.state.rollno} pattern="[0-9]*" required/>
-                  {this.state.errors.rollno && <div className="text-danger">{this.state.errors.rollno}</div>}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input onChange={this.handleChange} value={this.state.firstName} type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter Your First Name"/>
-                {this.state.errors.firstName && <div className="text-danger">{this.state.errors.firstName}</div>}
-                </div>
-                <div className="form-group">
-                <label htmlFor="lastName">Last Name</label>
-                  <input onChange={this.handleChange} value={this.state.lastName} type="text" className="form-control" id="lastName" name="lastName" placeholder="Enter Your Last Name"/>
-                  {this.state.errors.lastName && <div className="text-danger">{this.state.errors.lastName}</div>}
-                </div>
-            
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input onChange={this.handleChange} value={this.state.email} type="email" className="form-control" id="email" name="email" placeholder="Enter Your Email" required/>
-                  {this.state.errors.email && <div className="text-danger">{this.state.errors.email}</div>}
-                </div>
+    <div className="registrationform">
+      <h2>Student Registration</h2>
+      <form className='registration-form' onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="rollNumber">Roll Number:</label>
+          <input type="text" id="rollNumber" name="rollNumber" value={formData.rollNumber} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <select id="gender" name="gender" value={formData.gender} onChange={handleChange} required>
+            <option value="">--Select--</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mobile">Mobile:</label>
+          <input type="tel" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} required />
+        </div>
 
-                <div className="form-group">
-                  <label htmlFor="mobileNumber">Mobile Number</label>
-                  <input onChange={this.handleChange} value={this.state.mobileNumber} type="text" className="form-control" id="mobileNumber" name="mobileNumber" placeholder="Enter Your Mobile Number"/>
-                    {this.state.errors.mobileNumber && <div className="text-danger">{this.state.errors.mobileNumber}</div>}
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="fatherName">Father's Name</label>
-                  <input onChange={this.handleChange} value={this.state.fatherName} type="text" className="form-control" id="fatherName" name="fatherName" placeholder="Enter Your Father's Name"/>
-                  {this.state.errors.fatherName && <div className="text-danger">{this.state.errors.fatherName}</div>}
-                </div>
-
-                <div className="form-group">
-              <label htmlFor="motherName">Mother's Name</label>
-              <input onChange={this.handleChange} value={this.state.motherName} type="text" className="form-control" id="motherName" name="motherName" placeholder="Enter Your Mother's Name"/>
-              {this.state.errors.motherName && <div className="text-danger">{this.state.errors.motherName}</div>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="mobileNo">Mobile No. of Father/Mother</label>
-              <input onChange={this.handleChange} value={this.state.mobileNo} type="text" className="form-control" id="mobileNo" name="mobileNo" placeholder="Enter Mobile No. of Father/Mother"/>
-              {this.state.errors.mobileNo && <div className="text-danger">{this.state.errors.mobileNo}</div>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="permanentAddress">Permanent Address</label>
-              <textarea onChange={this.handleChange} value={this.state.permanentAddress} className="form-control" id="permanentAddress" name="permanentAddress" placeholder="Enter Your Permanent Address"></textarea>
-              {this.state.errors.permanentAddress && <div className="text-danger">{this.state.errors.permanentAddress}</div>}
-            </div>
-
-          
-          <div className="col-lg-8">
           <div className="form-group">
-          <label htmlFor="department">Department</label>
-          <select onChange={this.handleChange} value={this.state.department} className="form-control" id="department" name="department">
-            <option value="">Select Department</option>
-            <option value="BTech">BTech</option>
-            <option value="Mtech">Mtech</option>
-            <option value="MBA">MBA</option>
-            <option value="MCA">MCA</option>
-           <option value="Phd">Phd</option>
-           </select>
-         {this.state.errors.department && <div className="text-danger">{this.state.errors.department}</div>}
+            <label htmlFor="department">Department</label>
+            <select id="department" name="department" value={formData.department} onChange={handleChange} required>
+              <option value="">--Select Department--</option>
+              <option value="BTech">BTech</option>
+              <option value="Mtech">Mtech</option>
+              <option value="MBA">MBA</option>
+              <option value="MCA">MCA</option>
+              <option value="Phd">Phd</option>
+            </select>
           </div>
-          
-            <div className="form-group">
-              <label htmlFor="year">Year of Study</label>
-              <select onChange={this.handleChange} value={this.state.year} className="form-control" id="year" name="year">
-                 <option value="">Select Year of Study</option>
-                  {this.state.department === "BTech" && (
-                  <>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+
+         <div className="form-group">
+         <label htmlFor="branch">Branch</label>
+         <select id="branch" name="branch" value={formData.branch} onChange={handleChange} required>
+          <option value="">--Select Branch--</option>
+              {formData.department === 'BTech' && (
+                <>
+                  <option value="Civil Engineering">Civil Engineering</option>
+                  <option value="Computer Engineering">Computer Engineering</option>
+                  <option value="Electrical Engineering">Electrical Engineering</option>
+                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Mechanical Engineering">Mechanical Engineering</option>
+                  <option value="Production and Industrial Engineering">Production and Industrial Engineering</option>
                 </>
                 )}
-                {this.state.department === "Mtech" && (
-                  <>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                  </>
-                )}
-                {this.state.department === "MCA" && (
-                  <>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </>
-                )}
-                {this.state.department === "MBA" && (
-                  <>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                  </>
-                )}
-                {this.state.department === "Phd" && (
-                  <>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </>
-                )}
-              </select>
-            </div>
+                {formData.department === "Mtech" && (
+                <>
+                  <option value="Civil Engineering">Civil Engineering</option>
+                  <option value="Computer Engineering">Computer Engineering</option>
+                  <option value="Electrical Engineering">Electrical Engineering</option>
+                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Mechanical Engineering">Mechanical Engineering</option>
+                  <option value="Physics">Physics</option>
+                  <option value="School of VLSI Design & Embedded Systems">School of VLSI Design & Embedded Systems</option>
+                  <option value="School of Energy and Efficiency">School of Energy and Efficiency</option>
+                </>
+               )}
 
-            <div className="form-group">
-            <label htmlFor="bloodGroup">Blood Group</label>
-            <select onChange={this.handleChange} value={this.state.bloodGroup} className="form-control" id="bloodGroup" name="bloodGroup">
-              <option value="">Select Blood Group</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
+                {formData.department === "MCA" && (
+                    <>
+                      <option value="MCA">MCA</option>
+                    </>
+                  )}
+                {formData.department === "MBA" && (
+                  <>
+                    <option value="MBA">MBA</option>
+                  </>
+                )}
+                {formData.department === "Phd" && (
+                  <>
+                    <option value="Phd">Phd</option>
+                  </>
+                )}
             </select>
-             {this.state.errors.bloodGroup && <div className="text-danger">{this.state.errors.bloodGroup}</div>}
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input onChange={this.handleChange} name="password" value={this.state.password} type="password" className="form-control" id="password" placeholder="Password"/>
-              {this.state.errors.password && <div className="text-danger">{this.state.errors.password}</div>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPass">Confirm Password</label>
-              <input onChange={this.handleChange} value={this.state.confirmPass} type="password" className="form-control" id="confirmPass" name="confirmPass" placeholder="Confirm Your Password"/>
-              {this.state.errors.confirmPass && <div className="text-danger">{this.state.errors.confirmPass}</div>}
-            </div>
-          </div>
+         </div>
+         <div className="form-group">
+          <label htmlFor="year">Year:</label>
+          <select id="year" name="year" value={formData.year} onChange={handleChange} required>
+            <option value="">--Select--</option>
+            <option value="first">First Year</option>
+            <option value="second">Second Year</option>
+            <option value="third">Third Year</option>
+            <option value="fourth">Fourth Year</option>
+          </select>
         </div>
-        <div className="d-grid mt-4 col-4 mx-auto">
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </div>
-      </form>
-  );
+
+    <div className="form-group">
+      <label htmlFor="bloodGroup">Blood Group:</label>
+      <select id="bloodGroup" name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} required>
+        <option value="">--Select--</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="fatherName">Father's Name:</label>
+      <input type="text" id="fatherName" name="fatherName" value={formData.fatherName} onChange={handleChange} required />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="motherName">Mother's Name:</label>
+      <input type="text" id="motherName" name="motherName" value={formData.motherName} onChange={handleChange} required />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="parentMobile">Parent's Mobile Number:</label>
+      <input type="tel" id="parentMobile" name="parentMobile" value={formData.parentMobile} onChange={handleChange} pattern="[0-9]{10}" required />
+    </div>
+
+        <div className="form-group">
+      <label htmlFor="permanentAddress">Permanent Address:</label>
+      <input type="text" id="permanentAddress" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} required />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="password">Password:</label>
+      <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} minLength={8} required />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} minLength={8} required />
+    </div>
+
+    <button type="reset">Reset</button>
+    <button type="submit">Register</button>
+
+  </form>
+</div>
+);
 }
-
-export default RegistrationForm;
+export default Register;

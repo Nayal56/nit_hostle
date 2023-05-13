@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
+import './Login.css';
 
 function Login() {
-  const [selectedUserType, setSelectedUserType] = useState('student');
-  const [rollNumber, setRollNumber] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleUserTypeChange = (event) => {
-    setSelectedUserType(event.target.value);
-  };
-
-  const handleRollNumberChange = (event) => {
-    setRollNumber(event.target.value);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -19,60 +15,25 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Selected user type: ${selectedUserType}`);
-    console.log(`Roll number: ${rollNumber}`);
-    console.log(`Password: ${password}`);
-    // Add logic to handle form submission here
+    console.log('Username:', username);
+    console.log('Password:', password);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <div>
-        <label>
-          <input
-            type="radio"
-            value="admin"
-            checked={selectedUserType === 'admin'}
-            onChange={handleUserTypeChange}
-          />
-          Admin
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="supervisor"
-            checked={selectedUserType === 'supervisor'}
-            onChange={handleUserTypeChange}
-          />
-          Supervisor
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="student"
-            checked={selectedUserType === 'student'}
-            onChange={handleUserTypeChange}
-          />
-          Student
-        </label>
-      </div>
-      <div>
-        <label>
-          Roll Number:
-          <input type="text" value={rollNumber} onChange={handleRollNumberChange} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div className="login-container">
+      <form onSubmit={handleSubmit}>
+        <h2>Student Login</h2>
+        <div className="form-control">
+          <label htmlFor="username">Username:</label>
+          <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+        </div>
+        <div className="form-control">
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
   );
 }
 
