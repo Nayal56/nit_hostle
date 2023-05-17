@@ -8,6 +8,7 @@ function Nav() {
   const [selectedUser, setSelectedUser] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [id, setId] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -19,6 +20,7 @@ function Nav() {
 
   const handleCancel = () => {
     setSelectedUser("");
+    setId("");
     setUsername("");
     setPassword("");
     setShowPopup(false);
@@ -53,7 +55,6 @@ function Nav() {
               <button onClick={() => setSelectedUser("admin")}>Admin</button>
             </div>
             <div className="popup-content">
-              <h2>Login</h2>
               {selectedUser && (
                 <form onSubmit={handleLogin}>
                   {selectedUser === "student" && (
@@ -74,7 +75,7 @@ function Nav() {
                       />
                     </>
                   )}
-                  {(selectedUser === "administrator" || selectedUser === "admin") && (
+                  {(selectedUser === "administrator") && (
                     <>
                       <label htmlFor="email">Email:</label>
                       <input
@@ -82,6 +83,24 @@ function Nav() {
                         id="email"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <label htmlFor="password">Password:</label>
+                      <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </>
+                  )}
+                  {selectedUser === "admin" && (
+                    <>
+                      <label htmlFor="id">ID:</label>
+                      <input
+                        type="text"
+                        id="id"
+                        value={id}
+                        onChange={(e) => setId(e.target.value)}
                       />
                       <label htmlFor="password">Password:</label>
                       <input
