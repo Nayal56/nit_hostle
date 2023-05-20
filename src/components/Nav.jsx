@@ -9,8 +9,37 @@ function Nav() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [id, setId] = useState("");
-  const navigate = useNavigate();
 
+
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const [formData, setFormData] = useState({
+    rollNumber: '',
+    mobile: '',
+    email:'',
+    fullName: '',
+    password: '',
+    confirmPassword: '',
+    otp: '',
+  });
+
+  const [errors, setErrors] = useState({}); // Declare the errors variable
+
+  const resetForm = () => {
+    setFormData({
+      rollNumber: '',
+      mobile: '',
+      password: '',
+      email:'',
+      confirmPassword: '',
+      otp: '',
+    });
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleLogin = (event) => {
     event.preventDefault();
     // TODO: Handle login logic here
@@ -26,13 +55,25 @@ function Nav() {
     setShowPopup(false);
   };
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
+  const handleRegisterSubmit = (event) => {
+    event.preventDefault();
+    // TODO: Handle registration logic here
+    console.log("Registering as", selectedUser, "with username:", formData.rollNumber, "and password:", formData.password);
+    setShowRegisterForm(false);
+
+    // Additional logic for OTP verification
+    const { rollNumber, email, otp } = formData;
+    // TODO: Perform OTP verification here with the provided rollNumber, mobile, and otp values
+
+    resetForm();
+  };
+  const handleRegister = () => {
+    setSelectedUser('register');
+    setShowRegisterForm(true);
   };
 
-  const handleRegister = () => {
-    console.log('Register link clicked');
-    navigate('/register');
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
   };
   
   return (
@@ -50,14 +91,14 @@ function Nav() {
         {showPopup && (
           <div className="popup">
             <div className="popup-buttons">
-              <button onClick={() => setSelectedUser("student")}>Student</button>
-              <button onClick={() => setSelectedUser("administrator")}>Administrator</button>
-              <button onClick={() => setSelectedUser("admin")}>Admin</button>
+              <button onClick={() => setSelectedUser('student')}>Student</button>
+              <button onClick={() => setSelectedUser('administrator')}>Administrator</button>
+              <button onClick={() => setSelectedUser('admin')}>Admin</button>
             </div>
             <div className="popup-content">
               {selectedUser && (
                 <form onSubmit={handleLogin}>
-                  {selectedUser === "student" && (
+                  {selectedUser === 'student' && (
                     <>
                       <label htmlFor="rollno">Roll Number:</label>
                       <input
@@ -73,9 +114,16 @@ function Nav() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                            <div>
+                    <button type="submit">Login</button>
+                    <button type="button" onClick={handleCancel}> Cancel </button>
+                  </div>
+                  <br/>
+                  <button className='register' onClick={handleRegister}>Register</button>
+
                     </>
                   )}
-                  {(selectedUser === "administrator") && (
+                  {selectedUser === 'administrator' && (
                     <>
                       <label htmlFor="email">Email:</label>
                       <input
@@ -91,9 +139,11 @@ function Nav() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      <button type="submit">Login</button>
+                    <button type="button" onClick={handleCancel}> Cancel </button>
                     </>
                   )}
-                  {selectedUser === "admin" && (
+                  {selectedUser === 'admin' && (
                     <>
                       <label htmlFor="id">ID:</label>
                       <input
@@ -109,22 +159,52 @@ function Nav() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      <button type="submit">Login</button>
+                    <button type="button" onClick={handleCancel}> Cancel </button>
                     </>
                   )}
-                  <div>
-                    <button type="submit">Login</button>
-                    <button type="button" onClick={handleCancel}>
-                      Cancel
-                    </button>
-                  </div>
+            
+                  {selectedUser === 'register' && showRegisterForm && (
+                    <form className="registration-form" onSubmit={handleRegisterSubmit}>
+                      <div className="form-group">
+                        <label htmlFor="rollNumber">Roll Number:</label>
+                        <input type="text" id="rollNumber" name="rollNumber" value={formData.rollNumber} onChange={handleChange} required />
+                        {errors.rollNumber && <span className="error-message">{errors.rollNumber}</span>}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="fullName">Name:</label>
+                        <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required />
+                      </div>
+
+                                    <div className="form-group">
+                        <label htmlFor="email">Email:</label>
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                      </div>
+                      {/* <div className="form-group">
+                        <label htmlFor="otp">OTP:</label>
+                        <input type="text" id="otp" name="otp" value={formData.otp} onChange={handleChange} required />
+                        {errors.otp && <span className="error-message">{errors.otp}</span>}
+                      </div> */}
+                      <div className="form-group">
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} minLength={8} required />
+                        {errors.password && <span className="error-message">{errors.password}</span>}
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} minLength={8} required />
+                        {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
+                      </div>
+                      <button type="reset">Reset</button>
+                      <button type="submit">Register</button>
+                      <button type="button" onClick={handleCancel}> Cancel </button>
+                    </form>
+                  )}
                 </form>
               )}
-               {!selectedUser && <h3>Please select the user type !!!</h3>}
-              {selectedUser === "student" && (
-                <div>
-                  <p>If not registered, click here to <Link onClick={handleRegister}>register</Link>.</p>
-                </div>
-              )}
+              {!selectedUser && <h3>Please select the user type!</h3>}
+             
             </div>
           </div>
         )}

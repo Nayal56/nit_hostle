@@ -103,7 +103,7 @@ nav {
 
 .popup-content button {
   font-size: 16px;
-  background-color: #333;
+  background-color: #512ed1;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -119,3 +119,54 @@ nav {
 .popup-content button[type="button"] {
   background-color: #f44336;
 }
+
+
+  /* menu css
+
+
+  .menu-container {
+    position: relative;
+  }
+  
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-toggle i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 0.5rem;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none;
+  }
+  
+  .sub-menu li {
+    padding: 0.5rem;
+  }
+  
+  .sub-menu ul {
+    margin-top: 0.5rem;
+  }
+  
+  .menu-container:hover .sub-menu {
+    display: block;
+  }
+  
+  .menu-container:hover .menu-toggle i {
+    transform: rotate(180deg);
+  }
+   */
