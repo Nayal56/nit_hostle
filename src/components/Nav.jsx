@@ -17,9 +17,12 @@ function Nav() {
 
   const [formData, setFormData] = useState({
     rollNumber: "",
-    fullName: "",
+    mobile: "",
     email: "",
+    fullName: "",
     password: "",
+    confirmPassword: "",
+    otp: "",
   });
 
   const [errors, setErrors] = useState({}); // Declare the errors variable
@@ -33,36 +36,6 @@ function Nav() {
       confirmPassword: "",
       otp: "",
     });
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    // console.log(rollNumber);
-
-    fetch("http://localhost:5000/register", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        rollNumber,
-        name,
-        email,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "register");
-        if (data.status == "ok") {
-          alert("Registration Successful");
-        } else {
-          alert("Something went wrong");
-        }
-      });
   };
 
   const handleLogin = (event) => {
@@ -101,7 +74,7 @@ function Nav() {
     setShowRegisterForm(false);
 
     // Additional logic for OTP verification
-    // const { rollNumber, email, otp } = formData;
+    const { rollNumber, email, otp } = formData;
     // TODO: Perform OTP verification here with the provided rollNumber, mobile, and otp values
 
     resetForm();
@@ -113,6 +86,37 @@ function Nav() {
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    // console.log(email);
+
+    console.log(rollNumber, name, email, password);
+    fetch("http://localhost:5000/register", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        rollNumber,
+        name,
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userRegister");
+        if (data.status == "ok") {
+          alert("Registration Successful");
+        } else {
+          alert("Something went wrong");
+        }
+      });
   };
 
   return (
@@ -222,9 +226,10 @@ function Nav() {
                       </button>
                     </>
                   )}
+
+                  {/* ********************** */}
+                  {/* ********************** */}
                   {/* REGISTRATION FORM */}
-                  {/* ******************* */}
-                  {/* ******************* */}
                   {selectedUser === "register" && showRegisterForm && (
                     <form className="registration-form" onSubmit={handleChange}>
                       <div className="form-group">
@@ -237,19 +242,19 @@ function Nav() {
                           onChange={(e) => setRollNumber(e.target.value)}
                           required
                         />
-                        {/* {errors.rollNumber && (
+                        {errors.rollNumber && (
                           <span className="error-message">
                             {errors.rollNumber}
                           </span>
-                        )} */}
+                        )}
                       </div>
 
                       <div className="form-group">
                         <label htmlFor="fullName">Name:</label>
                         <input
                           type="text"
-                          id="fullName"
-                          name="fullName"
+                          id="name"
+                          name="name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
@@ -283,11 +288,11 @@ function Nav() {
                           minLength={8}
                           required
                         />
-                        {/* {errors.password && (
+                        {errors.password && (
                           <span className="error-message">
                             {errors.password}
                           </span>
-                        )} */}
+                        )}
                       </div>
                       {/* <div className="form-group">
                         <label htmlFor="confirmPassword">
@@ -312,7 +317,10 @@ function Nav() {
                       <button type="submit" onClick={handleChange}>
                         Register
                       </button>
-                      <button type="button"> Cancel </button>
+                      <button type="button" onClick={handleCancel}>
+                        {" "}
+                        Cancel{" "}
+                      </button>
                     </form>
                   )}
                 </form>
