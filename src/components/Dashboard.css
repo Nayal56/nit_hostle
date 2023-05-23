@@ -1,0 +1,19 @@
+.dashboard {
+    padding: 20px;
+    background-color: #6e4040;
+  }
+  
+  .navbar {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .logout-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  

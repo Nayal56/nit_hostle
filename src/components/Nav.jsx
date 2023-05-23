@@ -28,14 +28,10 @@ function Nav() {
   const [errors, setErrors] = useState({}); // Declare the errors variable
 
   const resetForm = () => {
-    setFormData({
-      rollNumber: "",
-      mobile: "",
-      password: "",
-      email: "",
-      confirmPassword: "",
-      otp: "",
-    });
+    setRollNumber("");
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   const handleLogin = (event) => {
@@ -85,6 +81,8 @@ function Nav() {
   };
 
   const togglePopup = () => {
+    setSelectedUser("student");
+    setShowRegisterForm(true);
     setShowPopup(!showPopup);
   };
 
@@ -113,16 +111,62 @@ function Nav() {
         console.log(data, "userRegister");
         if (data.status == "ok") {
           alert("Registration Successful");
+          resetForm();
+          setSelectedUser("student");
+          setShowRegisterForm(true);
         } else {
           alert("Something went wrong");
         }
       });
   };
 
+  // For Login in the authorized Page
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(email, password);
+    fetch("http://localhost:5000/login-user", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        rollNumber,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "student");
+        if (data.status == "OK") {
+          alert("Login Successful");
+          if (alert) {
+            handleClick();
+          }
+          window.localStorage.setItem("token", data.data);
+          window.location.href = "./Dashboard";
+        }
+      });
+  };
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/Dashboard");
+  };
+
   return (
     <nav>
       <div className="logo">
-        <img src={logo} alt="Logo" />
+        <div>
+          <img src={logo} alt="Logo" />
+        </div>
+        {/* <div>
+          <h4>NATIONAL INSTITUTE OF TECHNOLOGY</h4>,
+          <br />
+          <h5>KURUKSHETRA</h5>
+        </div> */}
       </div>
       <ul className="nav-links">
         <li>
@@ -150,15 +194,18 @@ function Nav() {
             </div>
             <div className="popup-content">
               {selectedUser && (
-                <form onSubmit={handleLogin}>
+                // *****************************
+                // *****************************
+                // Login Page
+                <form onSubmit={handleSubmit}>
                   {selectedUser === "student" && (
                     <>
                       <label htmlFor="rollno">Roll Number:</label>
                       <input
                         type="text"
                         id="rollno"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={rollNumber}
+                        onChange={(e) => setRollNumber(e.target.value)}
                       />
                       <label htmlFor="password">Password:</label>
                       <input
@@ -168,7 +215,9 @@ function Nav() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       <div>
-                        <button type="submit">Login</button>
+                        <button type="submit" onClick={handleSubmit}>
+                          Login
+                        </button>
                         <button type="button" onClick={handleCancel}>
                           {" "}
                           Cancel{" "}
@@ -313,7 +362,9 @@ function Nav() {
                           </span>
                         )}
                       </div> */}
-                      <button type="reset">Reset</button>
+                      <button type="reset" onClick={resetForm}>
+                        Reset
+                      </button>
                       <button type="submit" onClick={handleChange}>
                         Register
                       </button>
@@ -325,7 +376,7 @@ function Nav() {
                   )}
                 </form>
               )}
-              {!selectedUser && <h3>Please select the user type!</h3>}
+              {/* {!selectedUser && <h3>Please select the user type!</h3>} */}
             </div>
           </div>
         )}
