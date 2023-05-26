@@ -23,7 +23,7 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Avatar from '@mui/material/Avatar';
 
-
+import img1 from "./static/images/avatar/1.jpg"
 import Sidenav from './Sidenav';
 import Rightnav from "./Rightnav";
 import MainPage from './MainPage';
@@ -136,7 +136,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider>
         <Avatar
-        src="/static/images/avatar/1.jpg"
+        src={img1}
         sx={{ width: 90, height: 90 }}
          />    
         

@@ -1,16 +1,18 @@
 import React from 'react';
+import "./styledash.css"
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
+
 
 const Header = styled(Box)({
   width: '80%',
   height: '22%',
   backgroundColor: 'skyblue',
-  position: 'fixed',
-  padding: '80px',
-  top: '80px',
-  left:'2%',
+  position: 'relative',
+  padding: '47px',
+  top: '47px',
+  left:'-2%',
   border: '1px solid white',
 });
 
@@ -56,7 +58,7 @@ const MaintenanceBox = styled(Box)({
 
 function MainPage() {
   return (
-    <div>
+    <div className='main'>
       <Header>
         <Typography variant="h3">Hello</Typography>
       </Header>
