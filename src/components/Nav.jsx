@@ -12,6 +12,8 @@ function Nav() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [adminId, setAdminId] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
 
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
@@ -119,7 +121,8 @@ function Nav() {
         }
       });
   };
-
+  // **********************************
+  // **********************************
   // For Login in the authorized Page
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -134,6 +137,8 @@ function Nav() {
       },
       body: JSON.stringify({
         rollNumber,
+        name,
+        email,
         password,
       }),
     })
@@ -154,6 +159,43 @@ function Nav() {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/Dashboard");
+  };
+
+  // ***********************************
+  // ***********************************
+  // *********** ADMIN-LOGIN ***********
+  const handleAdmin = (e) => {
+    e.preventDefault();
+    console.log(adminId, adminPassword);
+    fetch("http://localhost:5050/admin-user", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        adminId,
+        adminPassword,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "admin");
+        if (data.status == "OK") {
+          alert("Login Successful");
+          if (alert) {
+            handleClickAdmin();
+          }
+          window.localStorage.setItem("token", data.data);
+          window.location.href = "./AdminPage";
+        }
+      });
+  };
+  const navigate1 = useNavigate();
+  const handleClickAdmin = () => {
+    navigate1("/AdminPage");
   };
 
   return (
@@ -252,23 +294,27 @@ function Nav() {
                       </button>
                     </>
                   )}
+                  {/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                  $$$$$$$$$$$$$$$ ADMIN PAGE $$$$$$$$$$$$$ */}
                   {selectedUser === "admin" && (
                     <>
-                      <label htmlFor="id">ID:</label>
+                      <label htmlFor="adminId">ID:</label>
                       <input
                         type="text"
-                        id="id"
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
+                        id="adminId"
+                        value={adminId}
+                        onChange={(e) => setAdminId(e.target.value)}
                       />
-                      <label htmlFor="password">Password:</label>
+                      <label htmlFor="adminPassword">Password:</label>
                       <input
                         type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        id="adminPassword"
+                        value={adminPassword}
+                        onChange={(e) => setAdminPassword(e.target.value)}
                       />
-                      <button type="submit">Login</button>
+                      <button type="submit" onClick={handleAdmin}>
+                        Login
+                      </button>
                       <button type="button" onClick={handleCancel}>
                         {" "}
                         Cancel{" "}
