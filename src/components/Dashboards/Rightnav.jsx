@@ -61,7 +61,7 @@ const Month = styled('div')({
 });
 
 const Day = styled('div')({
-  fontSize: '60px',
+  fontSize: '30px',
   marginBottom: '15px',
 });
 
