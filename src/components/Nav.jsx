@@ -3,6 +3,7 @@ import "./Nav.css";
 import logo from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
+
 function Nav() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
@@ -34,20 +35,6 @@ function Nav() {
     setName("");
     setEmail("");
     setPassword("");
-  };
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-    // TODO: Handle login logic here
-    console.log(
-      "Logging in as",
-      selectedUser,
-      "with username:",
-      username,
-      "and password:",
-      password
-    );
-    setShowPopup(false);
   };
 
   const handleCancel = () => {
@@ -147,19 +134,18 @@ function Nav() {
         console.log(data, "student");
         if (data.status == "OK") {
           alert("Login Successful");
-          if (alert) {
-            handleClick();
-          }
           window.localStorage.setItem("token", data.data);
           window.location.href = "./Dashboard";
+          navigate("/Dashboards/Dashboard");
+        }
+        else{
+          alert("NOT REGISTERD")
         }
       });
   };
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/Dashboard");
-  };
+
 
   // ***********************************
   // ***********************************
