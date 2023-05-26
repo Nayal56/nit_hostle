@@ -1,5 +1,4 @@
 import React from 'react';
-import "./styledash.css"
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
