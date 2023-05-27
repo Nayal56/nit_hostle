@@ -16,43 +16,48 @@ const Header = styled(Box)({
 });
 
 const MaintenanceBox = styled(Box)({
-    width: '20%',
+    width: '18%',
     height: '30%',
     backgroundColor: 'grey',
     position: 'fixed',
     right:'65%',
     top: '35%',
-    border: '2px solid white',
+    border: '2px solid black',
+    borderRadius: '20px',
   });
   
   const MessBillBox = styled(Box)({
-    width: '20%',
+    width: '18%',
     height: '30%',
     backgroundColor: 'grey',
     position: 'fixed',
     right:'30%',
     top: '35%',
-    border: '2px solid white',
+    border: '2px solid black',
+    borderRadius: '20px',
+
   });
   
   const OneBox = styled(Box)({
-    width: '20%',
+    width: '18%',
     height: '30%',
     backgroundColor: 'grey',
     position: 'fixed',  
     right:'65%',
     top: '68%',
-    border: '2px solid white',
+    border: '2px solid black',
+    borderRadius: '20px',
   });
   
   const TwoBox = styled(Box)({
-    width: '20%',
+    width: '18%',
     height: '30%',
     backgroundColor: 'grey',
     position: 'fixed',
     right:'30%',
     top: '68%',
-    border: '2px solid white',
+    border: '2px solid black',
+    borderRadius: '20px',
   });
 
 function MainPage() {

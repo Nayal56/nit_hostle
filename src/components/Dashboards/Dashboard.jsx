@@ -98,7 +98,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] =useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -109,9 +109,9 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+<Box sx={{ display: 'flex', backgroundColor: 'grey' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: 'grey' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -125,25 +125,20 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Sidenav/>
+          <Sidenav />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} sx={{ backgroundColor: 'grey' }}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider>
-        <Avatar
-        src={img1}
-        sx={{ width: 90, height: 90 }}
-         />    
-        
+          <Avatar src={img1} sx={{ width: 90, height: 90 }} />
         </Divider>
-           
         <List>
-          {['Dashboard', 'Mess Details', 'Maintance', 'Other'].map((text, index) => (
+          {['Dashboard', 'Mess Details', 'Maintenance', 'Other'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{

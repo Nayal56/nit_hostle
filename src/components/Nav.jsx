@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Nav.css";
 import logo from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import HomeImage from "./HomeImage";
+
 
 
 function Nav() {
@@ -413,7 +415,11 @@ function Nav() {
           </div>
         )}
       </div>
+      {/* <div className="center-container">
+        <HomeImage/>
+      </div> */}
     </nav>
+    
   );
 }
 
