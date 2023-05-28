@@ -25,7 +25,7 @@ import Profile from './Record/Profile';
 // const pages = ['', '', ''];
 const settings = ['Profile', 'Account', 'Logout'];
 
-function Sidenav() {
+function Sidenav(p) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -184,7 +184,7 @@ function Sidenav() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar  src="/static/images/avatar/1.jpg" />
                   <Student sx={{ my: 2, color: 'white', display: 'block' }}>
-                    Student Name
+                    {p.rollnumber}
                   </Student>
                 </IconButton>
               </Tooltip>
@@ -211,6 +211,7 @@ function Sidenav() {
                         <Link
                           to="/Profile"
                           style={{ textDecoration: 'none', color: 'inherit' }}
+                          state={{rollnumber: p.rollnumber}}
                         >
                           {setting}
                         </Link>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import "./Profile.css";
-
+import { useLocation } from "react-router-dom";
 
 const departments = ['Department 1', 'Department 2', 'Department 3']; // Replace with actual department options
 const years = ['Year 1', 'Year 2', 'Year 3']; // Replace with actual year options
 const bloodGroups = ['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'O-', 'AB-']; // Replace with actual blood group options
 
 const Profile = () => {
+
   const [department, setDepartment] = useState('');
   const [year, setYear] = useState('');
   const [contactNumber, setContactNumber] = useState('');
@@ -16,7 +17,9 @@ const Profile = () => {
   const [parentsMobileNumber, setParentsMobileNumber] = useState('');
   const [address, setAddress] = useState('');
   const [image, setImage] = useState(null);
-
+  console.log("hii");
+  const location = useLocation();
+  console.log(location.state);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -45,7 +48,6 @@ const Profile = () => {
     setAddress('');
     setImage(null);
   };
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);

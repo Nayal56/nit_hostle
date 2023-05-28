@@ -27,6 +27,7 @@ import img1 from "./static/images/avatar/1.jpg"
 import Sidenav from './Sidenav';
 import Rightnav from "./Rightnav";
 import MainPage from './MainPage';
+import {useLocation} from 'react-router-dom';
 
 
 const drawerWidth = 260;
@@ -107,7 +108,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const location = useLocation();
   return (
 <Box sx={{ display: 'flex', backgroundColor: 'grey' }}>
       <CssBaseline />
@@ -125,7 +126,7 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Sidenav />
+          <Sidenav rollnumber={location.state.rollNumber}/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} sx={{ backgroundColor: 'grey' }}>

@@ -97,25 +97,27 @@ function Nav() {
         password,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister");
-        if (data.status == "ok") {
-          alert("Registration Successful");
-          resetForm();
-          setSelectedUser("student");
-          setShowRegisterForm(true);
-        } else {
-          alert("Something went wrong");
-        }
-      });
+      .then((res) => {
+        res.json().then((data)=>{
+          console.warn(data)
+          console.log(data, "userRegister");
+          if (data.status == "ok") {
+            alert("Registration Successful");
+            resetForm();
+            setSelectedUser("student");
+            setShowRegisterForm(true);
+          } else {
+            alert("Something went wrong");
+          }
+        })
+      })
   };
   // **********************************
   // **********************************
   // For Login in the authorized Page
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(email, password);
+    console.log(rollNumber, password);
     fetch("http://localhost:5000/login-user", {
       method: "POST",
       crossDomain: true,
@@ -126,8 +128,6 @@ function Nav() {
       },
       body: JSON.stringify({
         rollNumber,
-        name,
-        email,
         password,
       }),
     })
@@ -137,8 +137,7 @@ function Nav() {
         if (data.status == "OK") {
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
-          window.location.href = "./Dashboard";
-          navigate("/Dashboards/Dashboard");
+         navigate('/dashboard',{state:{rollNumber:rollNumber}});
         }
         else{
           alert("NOT REGISTERD")

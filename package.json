@@ -30,10 +30,14 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
     "react-simple-image-slider": "^2.4.1",
     "react-slick": "^0.29.0",
     "react-slideshow-image": "^4.2.1",
     "slick-carousel": "^1.8.1",
+=======
+    "react-slick": "^0.29.0",
+>>>>>>> 03f909109f81afb114f30203f09f7ee14d2dc8dc
     "web-vitals": "^2.1.4"
   },
   "scripts": {
