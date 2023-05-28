@@ -12,7 +12,7 @@ function Nav() {
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [rollNumber, setRollNumber] = useState("");
-  const [name, setName] = useState("");
+  const [Name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [adminId, setAdminId] = useState("");
@@ -81,7 +81,7 @@ function Nav() {
     e.preventDefault();
     // console.log(email);
 
-    console.log(rollNumber, name, email, password);
+    console.log(rollNumber, Name, email, password);
     fetch("http://localhost:5000/register", {
       method: "POST",
       crossDomain: true,
@@ -92,7 +92,7 @@ function Nav() {
       },
       body: JSON.stringify({
         rollNumber,
-        name,
+        Name,
         email,
         password,
       }),
@@ -154,7 +154,7 @@ function Nav() {
   const handleAdmin = (e) => {
     e.preventDefault();
     console.log(adminId, adminPassword);
-    fetch("http://localhost:5050/admin-user", {
+    fetch("http://localhost:5000/admin-user", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -340,7 +340,7 @@ function Nav() {
                           type="text"
                           id="name"
                           name="name"
-                          value={name}
+                          value={Name}
                           onChange={(e) => setName(e.target.value)}
                           required
                         />

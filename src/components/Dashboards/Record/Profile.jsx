@@ -17,9 +17,9 @@ const Profile = () => {
   const [parentsMobileNumber, setParentsMobileNumber] = useState('');
   const [address, setAddress] = useState('');
   const [image, setImage] = useState(null);
-  console.log("hii");
   const location = useLocation();
-  console.log(location.state);
+  const rollnumber=location.state.rollnumber;
+  console.log(rollnumber);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +36,38 @@ const Profile = () => {
       address,
       image
     });
-
+    fetch("http://localhost:5000/updateform",
+    {
+      method:"POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+      rollnumber,
+      department,
+      year,
+      contactNumber,
+      bloodGroup,
+      fatherName,
+      motherName,
+      parentsMobileNumber,
+      address
+      }),
+    })
+    .then((res) => {
+      res.json().then((data)=>{
+        console.warn(data)
+        console.log(data, "update");
+        if (data.status == "ok") {
+          alert("update Successful");
+        } else {
+          alert("Something went wrong");
+        }
+      })
+    })
     // Reset the form after submission
     setDepartment('');
     setYear('');
@@ -46,7 +77,7 @@ const Profile = () => {
     setMotherName('');
     setParentsMobileNumber('');
     setAddress('');
-    setImage(null);
+    setImage('');
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
