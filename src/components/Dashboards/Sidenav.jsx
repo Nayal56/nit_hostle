@@ -26,7 +26,6 @@ import Profile from './Record/Profile';
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Sidenav(p) {
-  console.warn(p.rollnumber);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -212,6 +211,7 @@ function Sidenav(p) {
                         <Link
                           to="/Profile"
                           style={{ textDecoration: 'none', color: 'inherit' }}
+                          state={{rollnumber: p.rollnumber}}
                         >
                           {setting}
                         </Link>

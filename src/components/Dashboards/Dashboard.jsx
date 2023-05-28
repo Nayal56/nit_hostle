@@ -109,7 +109,6 @@ export default function MiniDrawer() {
     setOpen(false);
   };
   const location = useLocation();
-  console.log(location.state.rollNumber)
   return (
 <Box sx={{ display: 'flex', backgroundColor: 'grey' }}>
       <CssBaseline />
