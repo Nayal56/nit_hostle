@@ -1,64 +1,74 @@
 import React from "react";
-import "./HomeImage.css";
-import Nav from "./Nav";
+import { Link } from 'react-router-dom';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import img1 from "./images/1.jpg";
 import img2 from "./images/2.jpg";
 import img3 from "./images/3.jpg";
 import img4 from "./images/4.jpg";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import GroupsIcon from '@mui/icons-material/Groups';
 import Groups2Icon from '@mui/icons-material/Groups2';
+import GavelIcon from '@mui/icons-material/Gavel';
 import Divider from '@mui/material/Divider';
 import { Grid } from '@mui/material';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 
-function HomeImage() {
+const Container = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
+const CarouselContainer = styled('div')({
+  width: '145%',
+  position: 'relative',
+});
+
+const CarouselImage = styled('img')({
+  width: '100%',
+  height: 'auto',
+});
+
+const BoxContainer = styled(Box)({
+  width: '102%',
+  height: '100%',
+  backgroundColor: '#FF0000',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: '2px solid white',
+  borderRadius: '20px',
+  textAlign: 'center',
+});
+
+const HomeImage = () => {
+
+  const homebox = {
+    top:'100px',
+    width: '148%',
+    color: 'white',
+    padding: '10px',
+  };
+
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    autoplay: true, // Enable autoplay
+    autoplaySpeed: 3000, // Set the duration between slide transitions in milliseconds
   };
 
-  const Container = styled('div')({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  });
-
-  const CarouselContainer = styled('div')({
-    width: '10%',
-    position: 'relative',
-  });
-
-  const CarouselImage = styled('img')({
-    width: '10%',
-    height: 'auto',
-  });
-
-  const BoxContainer = styled(Box)({
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'grey',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '2px solid white',
-    borderRadius: '20px',
-    textAlign: 'center',
-  });
-
   return (
-    <div>
-      <Container>
+<div className="home-image-container" style={{ maxWidth: '896px', margin: '0 auto' }}>      <Container>
         <CarouselContainer>
           <Slider {...settings}>
             <div>
@@ -67,37 +77,53 @@ function HomeImage() {
             <div>
               <CarouselImage src={img2} alt="Hostel" />
             </div>
-            {/* <div>
+            <div>
               <CarouselImage src={img3} alt="Hostel" />
             </div>
             <div>
               <CarouselImage src={img4} alt="Hostel" />
-            </div> */}
+            </div>
           </Slider>
         </CarouselContainer>
-        <Divider />
+        <br/>
+        <div style={homebox}>
+        <Divider style={{ color: 'black' }} />
         <Grid container spacing={2}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={6} md={3}>
             <BoxContainer>
-              <Typography variant="h3">box 1</Typography>
+            <Link to="/HostelRules" style={{ textDecoration: 'none' }}>
+              <GavelIcon style={{ color: 'white' }}/>
+              <Typography color="white">Hostel Rules & Conducts</Typography>
+              </Link>
             </BoxContainer>
           </Grid>
-          <Grid item xs={6} md={4}>
+
+          <Grid item xs={6} md={3}>
             <BoxContainer>
-              <Groups2Icon />
-              <Typography>Girls Hostels</Typography>
+            <a href="https://nitkkr.ac.in/?page_id=28409" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'white' }}>
+              <TextSnippetIcon style={{ color: 'white' }}/>
+              <Typography color="white">Hostel Notifications</Typography>
+              </a>
             </BoxContainer>
           </Grid>
-          <Grid item xs={6} md={4}>
+          <Grid item xs={6} md={3}>
             <BoxContainer>
-              <GroupsIcon />
-              <Typography>Boys Hostels</Typography>
+            <Link to="/Girls" style={{ textDecoration: 'none' }}>
+              <Groups2Icon style={{ color: 'white' }}/>
+              <Typography color="white">Girls Hostels</Typography>
+              </Link>
+            </BoxContainer>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <BoxContainer>
+            <Link to="/Boys" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }}>
+              <GroupsIcon style={{ color: 'white' }}/>
+              <Typography color="white">Boys Hostels</Typography>
+              </Link>
             </BoxContainer>
           </Grid>
         </Grid>
-        <Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 4 }}>
-          Copyright © 2022 National Institute of Technology Kurukshetra. All Rights Reserved.
-        </Typography>
+        </div>
       </Container>
     </div>
   );

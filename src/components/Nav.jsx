@@ -188,6 +188,9 @@ function Nav() {
 
   return (
     <nav>
+      <div className="center-container">
+        <HomeImage/>
+      </div>
       <div className="logo">
         <div>
           <img src={logo} alt="Logo" />
@@ -415,9 +418,6 @@ function Nav() {
           </div>
         )}
       </div>
-      {/* <div className="center-container">
-        <HomeImage/>
-      </div> */}
     </nav>
     
   );
