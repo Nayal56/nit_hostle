@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 
+
 const RightnavContainer = styled(Box)(({ theme }) => ({
   position: 'fixed',
   top: '80px',
@@ -95,7 +96,7 @@ const Year = styled('div')(({ theme }) => ({
 
 const Rightnav = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-
+ 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -111,6 +112,7 @@ const Rightnav = () => {
   const currentYear = currentTime.getFullYear();
 
   return (
+   
     <RightnavContainer>
       <TimeAndDateBox>
         <Time>
