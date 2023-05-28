@@ -115,7 +115,8 @@ function Nav() {
   // For Login in the authorized Page
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(email, password);
+    console.log(e);
+    console.log(rollNumber, password);
     fetch("http://localhost:5000/login-user", {
       method: "POST",
       crossDomain: true,
@@ -126,8 +127,6 @@ function Nav() {
       },
       body: JSON.stringify({
         rollNumber,
-        name,
-        email,
         password,
       }),
     })
@@ -138,7 +137,7 @@ function Nav() {
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
           window.location.href = "./Dashboard";
-          navigate("/Dashboards/Dashboard");
+         // navigate("/Dashboards/Dashboard");
         }
         else{
           alert("NOT REGISTERD")

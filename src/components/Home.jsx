@@ -4,8 +4,8 @@ import Nav from "./Nav";
 import img1 from "./images/1.jpg";
 import img2 from "./images/2.jpg";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import HomeImage from "./HomeImage";
 
 function Home() {
@@ -23,7 +23,7 @@ function Home() {
     <div>
       <Nav />
       <h1>Welcome to our Hostel</h1>
-     
+      {/* <HomeImage></HomeImage>  */}
       {/* <div className="carousel">
         <Slider {...settings}>
           <div>

@@ -1,4 +1,5 @@
 .registration-form {
+    background-color: azure;
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -7,6 +8,9 @@
   
   .registration-form label {
     margin-bottom: 10px;
+    font-size: larger;
+    font-weight: 400;
+    color: blue;
   }
   
   .registration-form select,
@@ -14,9 +18,9 @@
   .registration-form textarea {
     width: 100%;
     padding: 5px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    border-radius: 19px;
+    border: 3px solid #8e8989;
+    box-sizing: content-box;
     margin-top: 5px;
   }
   
@@ -32,4 +36,5 @@
   .registration-form button[type='submit']:hover {
     background-color: #45a049;
   }
+  
   

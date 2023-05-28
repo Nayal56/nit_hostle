@@ -6,8 +6,8 @@ import img2 from "./images/2.jpg";
 import img3 from "./images/3.jpg";
 import img4 from "./images/4.jpg";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
@@ -35,7 +35,7 @@ function HomeImage() {
   });
 
   const CarouselContainer = styled('div')({
-    width: '10%',
+    width: '50%',
     position: 'relative',
   });
 
@@ -57,7 +57,7 @@ function HomeImage() {
   });
 
   return (
-    <div>
+    <div class="corl">
       <Container>
         <CarouselContainer>
           <Slider {...settings}>

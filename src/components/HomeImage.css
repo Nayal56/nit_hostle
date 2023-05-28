@@ -7,7 +7,7 @@
   }
   .carousel-image {
     width: '5px'; /* Adjust the maximum width to your desired size */
-    height: 6px; /* Maintain aspect ratio */
+    height: '6px'; /* Maintain aspect ratio */
     margin: 0 auto; /* Center the image horizontally */
   }
   
@@ -44,5 +44,11 @@
     max-width: 200px;
     height: auto;
     margin-bottom: 1rem;
+  }
+  .crol 
+  {
+    position:'relative';
+    right:65%;
+    
   }
   
