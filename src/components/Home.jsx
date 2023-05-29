@@ -1,7 +1,5 @@
 import React from "react";
 import Nav from "./Nav";
-<<<<<<< HEAD
-=======
 import img1 from "./images/1.jpg";
 import img2 from "./images/2.jpg";
 import Slider from "react-slick";
@@ -19,14 +17,10 @@ function Home() {
     autoplay: true,
     autoplaySpeed: 2000,
   };
->>>>>>> 03f909109f81afb114f30203f09f7ee14d2dc8dc
 
 const Home = () => {
   return (
     <div>
-<<<<<<< HEAD
-      <Nav/>
-=======
       <Nav />
       <h1>Welcome to our Hostel</h1>
       {/* <HomeImage></HomeImage>  */}
@@ -40,9 +34,7 @@ const Home = () => {
           </div>
         </Slider>
       </div> */}
->>>>>>> 03f909109f81afb114f30203f09f7ee14d2dc8dc
     </div>
   );
 }
-
 export default Home;
