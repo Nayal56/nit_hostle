@@ -8,9 +8,7 @@ import img1 from "./images/1.jpg";
 import img2 from "./images/2.jpg";
 import img3 from "./images/3.jpg";
 import img4 from "./images/4.jpg";
-import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+
 
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
@@ -69,37 +67,8 @@ const HomeImage = () => {
     autoplaySpeed: 3000, // Set the duration between slide transitions in milliseconds
   };
 
-  const Container = styled('div')({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  });
-
-  const CarouselContainer = styled('div')({
-    width: '50%',
-    position: 'relative',
-  });
-
-  const CarouselImage = styled('img')({
-    width: '10%',
-    height: 'auto',
-  });
-
-  const BoxContainer = styled(Box)({
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'grey',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '2px solid white',
-    borderRadius: '20px',
-    textAlign: 'center',
-  });
-
-  return (
-    <div class="corl">
-      <Container>
+  return ( 
+         <div className="home-image-container" style={{ maxWidth: '896px', margin: '0 auto' }}>      <Container>
         <CarouselContainer>
           <Slider {...settings}>
             <div>
