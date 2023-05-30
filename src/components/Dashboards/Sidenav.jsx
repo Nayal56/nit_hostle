@@ -28,14 +28,25 @@ const settings = ['Profile', 'Account', 'Logout'];
 function Sidenav(p) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [img, setImage1] = useState("");
+  fetch(`http://localhost:5000/getprofile/${p.rollnumber}`
+  ).then((res)=>{
+    console.log("hello");
+    res.json().then((data)=>{
+       console.log(data);
+       setImage1(data.image);
+    })
+    })
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
+  const logout = () => {
+    window.localStorage.clear();
+    window.location.href = "./";
+  };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -182,7 +193,7 @@ function Sidenav(p) {
               }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar  src="/static/images/avatar/1.jpg" />
+                  <Avatar  src={img} />
                   <Student sx={{ my: 2, color: 'white', display: 'block' }}>
                     {p.rollnumber}
                   </Student>
@@ -212,6 +223,20 @@ function Sidenav(p) {
                           to="/Profile"
                           style={{ textDecoration: 'none', color: 'inherit' }}
                           state={{rollnumber: p.rollnumber}}
+                        >
+                          {setting}
+                        </Link>
+                      </MenuItem>
+                    );
+                  }
+                  else if (setting === "Logout") {
+                    return (
+                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Link
+                          to="/"
+                          onClick={logout}
+                          style={{ textDecoration: "none", color: "inherit" }}
+                          // preventScrollReset={true}
                         >
                           {setting}
                         </Link>

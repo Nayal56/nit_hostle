@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
@@ -60,11 +60,22 @@ const MaintenanceBox = styled(Box)({
     borderRadius: '20px',
   });
 
-function MainPage() {
+function MainPage(p) {
+  const [name,setname] = useState("");
+  fetch(`http://localhost:5000/getname/${p.rollnumber}`
+  ).then((res)=>{
+    console.log("setname");
+    res.json().then((data)=>{
+       console.log(data);
+       setname(data.Name);
+    })
+    });
   return (
     <div className='main'>
       <Header>
-        <Typography variant="h3">Hello</Typography>
+      <Typography variant="h4" textAlign="left">
+          Welcome, {name}    
+        </Typography>
       </Header>
       <MaintenanceBox>
       <Typography variant="h3">Maintain</Typography>

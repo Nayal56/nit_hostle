@@ -8,17 +8,22 @@ import Girls from "./components/Home Page Components/Hostels/Girls";
 import HostelRules from "./components/Home Page Components/Hostels/HostelRules";
 
 function App() {
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
   return (
     <div className="App">
       <Routes>
-      <Route path="/" element={<Home/>} />
+        <Route
+          exact
+          path="/"
+          element={isLoggedIn == "true" ? <Dashboard /> : <Home />}
+        />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/Profile" element={<Profile/> } />
 
 
-        <Route path="/Boys" component={<Boys/>} />
-        <Route path="/Girls" component={<Girls/>} />
-        <Route path="/HostelRules" component={<HostelRules/>} />
+        <Route path="/Boys" element={<Boys/>} />
+        <Route path="/Girls"  element={<Girls/>} />
+        <Route path="/HostelRules"  element={<HostelRules/>} />
 
 
       </Routes>

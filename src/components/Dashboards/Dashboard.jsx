@@ -23,7 +23,7 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Avatar from '@mui/material/Avatar';
 
-import img1 from "./static/images/avatar/1.jpg"
+//import img1 from "./static/images/avatar/1.jpg"
 import Sidenav from './Sidenav';
 import Rightnav from "./Rightnav";
 import MainPage from './MainPage';
@@ -100,7 +100,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-
+  const [img1,setimg2] = useState("./static/images/avatar/1.jpg")
+  const location = useLocation();
+  fetch(`http://localhost:5000/getprofile/${location.state.rollNumber}`
+  ).then((res)=>{
+    console.log("hello");
+    res.json().then((data)=>{
+       console.log(data);
+       setimg2(data.image);
+    })
+    });
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -108,7 +117,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const location = useLocation();
+
   return (
 <Box sx={{ display: 'flex', backgroundColor: 'grey' }}>
       <CssBaseline />
@@ -165,7 +174,7 @@ export default function MiniDrawer() {
         <Rightnav />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <MainPage />
+        <MainPage rollnumber={location.state.rollNumber} />
       </Box>
     </Box>
   );

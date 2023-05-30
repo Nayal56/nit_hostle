@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Profile.css";
 import { useLocation } from "react-router-dom";
+import { Troubleshoot } from '@mui/icons-material';
 
 const departments = ['Department 1', 'Department 2', 'Department 3']; // Replace with actual department options
 const years = ['Year 1', 'Year 2', 'Year 3']; // Replace with actual year options
@@ -54,7 +55,8 @@ const Profile = () => {
       fatherName,
       motherName,
       parentsMobileNumber,
-      address
+      address,
+      image
       }),
     })
     .then((res) => {
@@ -80,11 +82,19 @@ const Profile = () => {
     setImage('');
   };
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+    console.log(e);
+    var reader= new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload=()=>{
+      console.log(reader.result);//base64encoded string
+      setImage(reader.result);
+    };
+    reader.onerror = error =>{
+      console.log("error:",error);
+    };
   };
 
-  return (
+  return(
     <form onSubmit={handleSubmit} className="registration-form">
       <label>
         Department:
@@ -169,14 +179,10 @@ const Profile = () => {
         Address:
         <textarea value={address} onChange={(e) => setAddress(e.target.value)}></textarea>
       </label>
-      <br />
-
-      <label>
-        Upload Profile Photo:
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-      </label>
-      <br />
-
+      <br/>
+      <label>Upload Profile Photo:</label>
+      <input type="file" accept="image/*" onChange={handleImageChange} />    
+      <br/>
       <button type="submit">Submit</button>
     </form>
   );

@@ -68,7 +68,7 @@ const HomeImage = () => {
   };
 
   return ( 
-         <div className="home-image-container" style={{ maxWidth: '896px', margin: '0 auto' }}>      <Container>
+         <div className="home-image-container" style={{ maxWidth: '800px', margin: '0 auto' }}>      <Container>
         <CarouselContainer>
           <Slider {...settings}>
             <div>
