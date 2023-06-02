@@ -137,7 +137,7 @@ function Nav() {
         if (data.status == "OK") {
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
-         navigate('/dashboard',{state:{rollNumber:rollNumber}});
+         navigate('/StudentDashboard',{state:{rollNumber:rollNumber}});
         }
         else{
           alert("NOT REGISTERD")

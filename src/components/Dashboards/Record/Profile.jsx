@@ -18,6 +18,7 @@ const Profile = () => {
   const [parentsMobileNumber, setParentsMobileNumber] = useState('');
   const [address, setAddress] = useState('');
   const [image, setImage] = useState(null);
+  const [DOB,setdate] = useState('');
   const location = useLocation();
   const rollnumber=location.state.rollnumber;
   console.log(rollnumber);
@@ -31,6 +32,7 @@ const Profile = () => {
       year,
       contactNumber,
       bloodGroup,
+      DOB,
       fatherName,
       motherName,
       parentsMobileNumber,
@@ -52,6 +54,7 @@ const Profile = () => {
       year,
       contactNumber,
       bloodGroup,
+      DOB,
       fatherName,
       motherName,
       parentsMobileNumber,
@@ -80,6 +83,7 @@ const Profile = () => {
     setParentsMobileNumber('');
     setAddress('');
     setImage('');
+    setdate('');
   };
   const handleImageChange = (e) => {
     console.log(e);
@@ -144,7 +148,15 @@ const Profile = () => {
         </select>
       </label>
       <br />
-
+      <label>
+        DOB:
+        <input
+          type="date"
+          value={DOB}
+          onChange={(e) => setdate(e.target.value)}
+        />
+      </label>
+      <br />
       <label>
         Father's Name:
         <input
