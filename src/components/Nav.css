@@ -1,53 +1,116 @@
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  background-color: #afbf78;
-  height: 80px;
-  padding: 0 50px;
+  /* background-color: lightgrey; */
+  padding: 10px;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+.nav-login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-login-button button {
+  background-color: #f0f0f0;
+  color: #333;
+  margin-left: 1200%;
+  padding: 4px 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-login-button button:hover {
+  background-color: #ccc;
+}
+
+.nav-login-button button:focus {
+  outline: none;
+}
+
+.nav-login-button button:active {
+  transform: translateY(1px);
+}
+
+.logo {
+  margin-right: 10px;
 }
 
 .logo img {
-  height: 78px;
-  width: 115%;
+  width: 100px;
+  height: 100px;
+  margin-left: 90px;
 }
 
 
 .center-container {
   position: absolute;
-  top: 87%;
+  top: 525px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .nav-links {
+  list-style-type: none;
   display: flex;
-}
+  align-items: center;
+  /* margin-top: 0px; */
+  margin: -10px;
+  padding: 20px;
+  margin-left: 210px;
+  /* background-color: white; */}
 
 .nav-links li {
-  list-style: none;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .nav-links li a {
-  color: #fff;
   text-decoration: none;
-  font-size: 18px;
-}
-
-.login-signup {
-  position: relative;
-}
-
-.login-signup button {
-  font-size: 16px;
-  background-color: #fff;
   color: #333;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
 }
+
+.navbar-bottom {
+  padding: 0px;
+  margin-left: 0px;
+  /* background-color: white; */
+}
+
+.navbar-bottom .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar-bottom .nav-links li {
+  margin-right: 20px;
+}
+
+.navbar-bottom .nav-links a {
+  text-decoration: none;
+  color: #333;
+  position: center;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: 16px; /* Set the font size */
+  font-family: Arial, sans-serif; /* Set the font family */
+  justify-content: flex-end;
+}
+
+
 
 .popup {
   position: fixed;
@@ -63,120 +126,124 @@ nav {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  
+}
+
+ h1 {
+  padding: 35px 35px 0 35px;
+  font-family: Monospace;
+  font-weight: 400;
+  text-align: left;
+  margin-top: -40px;
+margin-right: 40px;
+}
+
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 5s steps(40,end);
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 
-.popup-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.popup-buttons button {
-  width: 145px;
-  height: 40px;
-  font-size: 16px;
-  padding: 1px 2px;
-  font-size: 16px;
-  background-color: #3363b0;
-  color: #fff;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  margin-right: .8px;
-}
 
 .popup-content {
 
   background-color: #fff;
-  border-radius: 10px;
   padding: 20px;
   width: 400px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   max-height: 100%;
 }
 
-.popup-content label {
+.input-field input {
+  font-size: 16px;
   display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-.popup-content input {
-  font-size: 16px;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  font-family: 'Rubik', sans-serif;
   width: 100%;
-  margin-bottom: 10px;
+  padding: 15px 5px;
+  border: 0;
+  border-bottom: 1px solid #747474;
+  outline: none;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
-.popup-content button {
-  font-size: 16px;
-  background-color: #512ed1;
-  color: #fff;
+.input-field input::-webkit-input-placeholder {
+  text-transform: uppercase;
+}
+.input-field input::-moz-placeholder {
+  text-transform: uppercase;
+}
+.input-field input:-ms-input-placeholder {
+  text-transform: uppercase;
+}
+.input-field input::-ms-input-placeholder {
+  text-transform: uppercase;
+}
+ .input-field input::placeholder {
+  text-transform: uppercase;
+}
+ .input-field input:focus {
+  border-color: #222;
+}
+
+.action button {
+  width: 50%;
   border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
+  padding: 15px;
+  font-family: 'Rubik', sans-serif;
   cursor: pointer;
-  margin-right: 10px;
+  text-transform: uppercase;
+  background: #e8e9ec;
+  color: #777;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+  letter-spacing: 0.2px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.action button:hover {
+  background: #d8d8d8;
+}
+.action button:nth-child(2) {
+  background: #2d3b55;
+  color: #fff;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 4px;
+}
+.action button:nth-child(2):hover {
+  background: #3c4d6d;
 }
 
-.popup-content button[type="submit"] {
-  background-color: #4CAF50;
+
+
+
+
+
+.user-button {
+  background-color: gray;
+  color: white;
+  border: none;
+  
+  width: 145px;
+  height: 40px;
+  font-size: 16px;
+  padding: 1px 2px;
+  font-size: 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: .8px;
 }
 
-.popup-content button[type="button"] {
-  background-color: #f44336;
+.user-button.selected {
+  background-color: #B2BEB5;
 }
-
-
-  /* menu css
-
-
-  .menu-container {
-    position: relative;
-  }
-  
-  .menu-toggle {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .menu-toggle i {
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .sub-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #f1f1f1;
-    padding: 0.5rem;
-    list-style: none;
-    border: 1px solid #ccc;
-    border-top: none;
-    display: none;
-  }
-  
-  .sub-menu li {
-    padding: 0.5rem;
-  }
-  
-  .sub-menu ul {
-    margin-top: 0.5rem;
-  }
-  
-  .menu-container:hover .sub-menu {
-    display: block;
-  }
-  
-  .menu-container:hover .menu-toggle i {
-    transform: rotate(180deg);
-  }
-   */

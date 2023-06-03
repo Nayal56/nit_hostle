@@ -27,13 +27,13 @@ const Container = styled('div')({
 });
 
 const CarouselContainer = styled('div')({
-  width: '145%',
-  position: 'relative',
+  width: '1348px',
+  position: '',
 });
 
 const CarouselImage = styled('img')({
-  width: '100%',
-  height: 'auto',
+  width: '1345px',
+  height: '580px',
 });
 
 const BoxContainer = styled(Box)({
@@ -46,13 +46,14 @@ const BoxContainer = styled(Box)({
   border: '2px solid white',
   borderRadius: '20px',
   textAlign: 'center',
+  
 });
 
 const HomeImage = () => {
 
   const homebox = {
     top:'100px',
-    width: '148%',
+    width: '160%',
     color: 'white',
     padding: '10px',
   };
@@ -68,8 +69,9 @@ const HomeImage = () => {
   };
 
   return ( 
-         <div className="home-image-container" style={{ maxWidth: '800px', margin: '0 auto' }}>      <Container>
-        <CarouselContainer>
+        <div className="home-image-container" style={{ maxWidth: '800px', margin: '0 auto' }}>      
+        <Container>        
+          <CarouselContainer>
           <Slider {...settings}>
             <div>
               <CarouselImage src={img1} alt="Hostel" />
@@ -87,7 +89,7 @@ const HomeImage = () => {
         </CarouselContainer>
         <br/>
         <div style={homebox}>
-        <Divider style={{ color: 'black' }} />
+        {/* <Divider style={{ color: 'black' }} /> */}
         <Grid container spacing={2}>
           <Grid item xs={6} md={3}>
             <BoxContainer>

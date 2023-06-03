@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Nav.css";
 import logo from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import HomeImage from "./HomeImage";
-
-
+import ClearSharpIcon from '@mui/icons-material/ClearSharp';
 
 function Nav() {
   const [showPopup, setShowPopup] = useState(false);
@@ -31,6 +30,15 @@ function Nav() {
   });
 
   const [errors, setErrors] = useState({}); // Declare the errors variable
+
+
+  const handleUserSelection = (user) => {
+    setSelectedUser(user);
+  };
+  
+  const isUserSelected = (user) => {
+    return selectedUser === user ? 'selected' : '';
+  };
 
   const resetForm = () => {
     setRollNumber("");
@@ -96,21 +104,20 @@ function Nav() {
         email,
         password,
       }),
-    })
-      .then((res) => {
-        res.json().then((data)=>{
-          console.warn(data)
-          console.log(data, "userRegister");
-          if (data.status == "ok") {
-            alert("Registration Successful");
-            resetForm();
-            setSelectedUser("student");
-            setShowRegisterForm(true);
-          } else {
-            alert("Something went wrong");
-          }
-        })
-      })
+    }).then((res) => {
+      res.json().then((data) => {
+        console.warn(data);
+        console.log(data, "userRegister");
+        if (data.status == "ok") {
+          alert("Registration Successful");
+          resetForm();
+          setSelectedUser("student");
+          setShowRegisterForm(true);
+        } else {
+          alert("Something went wrong");
+        }
+      });
+    });
   };
   // **********************************
   // **********************************
@@ -137,16 +144,14 @@ function Nav() {
         if (data.status == "OK") {
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
-         navigate('/StudentDashboard',{state:{rollNumber:rollNumber}});
-        }
-        else{
-          alert("NOT REGISTERD")
+          navigate("/StudentDashboard", { state: { rollNumber: rollNumber } });
+        } else {
+          alert("NOT REGISTERD");
         }
       });
   };
 
   const navigate = useNavigate();
-
 
   // ***********************************
   // ***********************************
@@ -185,44 +190,107 @@ function Nav() {
     navigate1("/AdminPage");
   };
 
+  const [textName, setTextName] = useState(
+    "National Institute of Technology Kurukshetra"
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextName((prevName) =>
+        prevName === "National Institute of Technology Kurukshetra"
+          ? "राष्ट्रीय प्रौद्योगिकी संस्थान कुरुक्षेत्र"
+          : "National Institute of Technology Kurukshetra"
+      ); // Toggle between English and Hindi
+    }, 3000); // Change state every 5 seconds
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
+
+  const [nextName, setNextName] = useState("Institute of National Importance");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNextName((prevName) =>
+        prevName === "Institute of National Importance"
+          ? "राष्ट्रीय महत्व का संस्थान"
+          : "Institute of National Importance"
+      ); // Toggle between English and Hindi
+    }, 3000); // Change state every 5 seconds
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
+
+  const hrStyle = {
+    color: "red", // Change the color to your desired value
+    backgroundColor: "red", // Change the background color to your desired value
+    height: "2px", // Change the height to your desired value
+    border: "none", // Remove the border if desired
+    width: "90%",
+    marginTop: "0",
+    marginBottom: "10px",
+  };
+
   return (
-    <nav>
-      <div className="center-container">
-        <HomeImage/>
-      </div>
-      <div className="logo">
-        <div>
+    <>
+      <nav>
+        <div className="center-container">
+          <HomeImage />
+        </div>
+        <div className="logo">
           <img src={logo} alt="Logo" />
         </div>
-        {/* <div>
-          <h4>NATIONAL INSTITUTE OF TECHNOLOGY</h4>,
-          <br />
-          <h5>KURUKSHETRA</h5>
-        </div> */}
-      </div>
-      <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-      </ul>
-      <div className="login-signup">
-        <button onClick={togglePopup}>Login/Signup</button>
-        {showPopup && (
+        <div>
+          <h3 className="text">
+            {textName}
+            <br />
+            {nextName}
+            <div className="text2">Kurukshetra-136119,Haryana</div>
+          </h3>
+          </div>
+
+        
+      </nav>
+      <hr style={hrStyle} />
+      <nav className="navbar-bottom">
+        <ul className="nav-links">
+          <li>
+            <a href="/">HOME</a>
+          </li>
+          <li>
+            <a href="/">ABOUT</a>
+          </li>
+          <li>
+            <a href="/">CONTACT</a>
+          </li>
+        </ul>
+        <div className="nav-login-button">
+            <button onClick={togglePopup}>Login/Signup</button>
+          </div>     
+
+      </nav>
+          <div className="login-signup">
+         {showPopup && (
           <div className="popup">
             <div className="popup-buttons">
-              <button onClick={() => setSelectedUser("student")}>
-                Student
-              </button>
-              <button onClick={() => setSelectedUser("administrator")}>
-                Administrator
-              </button>
-              <button onClick={() => setSelectedUser("admin")}>Admin</button>
+
+            <button
+              className={`user-button ${isUserSelected('student')}`}
+              onClick={() => handleUserSelection('student')}
+            >
+              Student
+            </button>
+            <button
+              className={`user-button ${isUserSelected('administrator')}`}
+              onClick={() => handleUserSelection('administrator')}
+            >
+              Administrator
+            </button>
+            <button
+              className={`user-button ${isUserSelected('admin')}`}
+              onClick={() => handleUserSelection('admin')}
+            >
+              Admin
+            </button>
             </div>
             <div className="popup-content">
               {selectedUser && (
@@ -232,76 +300,114 @@ function Nav() {
                 <form onSubmit={handleSubmit}>
                   {selectedUser === "student" && (
                     <>
-                      <label htmlFor="rollno">Roll Number:</label>
+                    <ClearSharpIcon
+                      style={{
+                        height: '20px',
+                        width: '30px',
+                        left: '190px',
+                        position: 'relative',
+                        cursor: 'pointer',
+                      }}
+                      onClick={handleCancel}
+                    />
+                  <div className="typing-effect">
+                    <h1>Student Login</h1>
+                    </div>
+                    <div className="input-field">
                       <input
                         type="text"
+                        placeholder="ROLL NUMBER"
                         id="rollno"
                         value={rollNumber}
                         onChange={(e) => setRollNumber(e.target.value)}
                       />
-                      <label htmlFor="password">Password:</label>
+                      </div>
+                      <div className="input-field">
                       <input
                         type="password"
+                        placeholder="PASSWORD"
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      <div>
+                      <br/>
+                      </div>
+                      <div className="action">
                         <button type="submit" onClick={handleSubmit}>
                           Login
                         </button>
-                        <button type="button" onClick={handleCancel}>
+                        {/* <button type="button" onClick={handleCancel}>
                           {" "}
                           Cancel{" "}
-                        </button>
-                      </div>
-                      <br />
+                        </button> */}
                       <button className="register" onClick={handleRegister}>
                         Register
                       </button>
+                      </div>
                     </>
                   )}
+
+
                   {selectedUser === "administrator" && (
                     <>
-                      <label htmlFor="email">Email:</label>
+                    <div className="typing-effect">
+                      <h1>Administrator Login</h1>
+                      </div>
+                    <div className="input-field">
                       <input
                         type="text"
+                        placeholder="EMAIL"
                         id="email"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
-                      <label htmlFor="password">Password:</label>
+                      </div>
+                      <div className="input-field">
                       <input
                         type="password"
+                        placeholder="PASSWORD"
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      </div>
+                      <br/>
+                      <div className="action">
                       <button type="submit">Login</button>
                       <button type="button" onClick={handleCancel}>
                         {" "}
                         Cancel{" "}
                       </button>
+                      </div>
                     </>
                   )}
                   {/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                   $$$$$$$$$$$$$$$ ADMIN PAGE $$$$$$$$$$$$$ */}
                   {selectedUser === "admin" && (
                     <>
-                      <label htmlFor="adminId">ID:</label>
+                    <div className="typing-effect">
+                      <h1>Admin Login</h1>
+                      </div>
+                    <div className="input-field">
                       <input
                         type="text"
+                        placeholder="Admin ID"
                         id="adminId"
                         value={adminId}
                         onChange={(e) => setAdminId(e.target.value)}
                       />
-                      <label htmlFor="adminPassword">Password:</label>
+                      </div>
+                      <div className="input-field">
                       <input
                         type="password"
+                        placeholder="PASSWORD"
                         id="adminPassword"
                         value={adminPassword}
                         onChange={(e) => setAdminPassword(e.target.value)}
                       />
+                      </div>
+                      <br/>
+                      <div className="action">
                       <button type="submit" onClick={handleAdmin}>
                         Login
                       </button>
@@ -309,6 +415,7 @@ function Nav() {
                         {" "}
                         Cancel{" "}
                       </button>
+                      </div>
                     </>
                   )}
 
@@ -316,99 +423,117 @@ function Nav() {
                   {/* ********************** */}
                   {/* REGISTRATION FORM */}
                   {selectedUser === "register" && showRegisterForm && (
-                    <form className="registration-form" onSubmit={handleChange}>
-                      <div className="form-group">
-                        <label htmlFor="rollNumber">Roll Number:</label>
-                        <input
-                          type="text"
-                          id="rollNumber"
-                          name="rollNumber"
-                          value={rollNumber}
-                          onChange={(e) => setRollNumber(e.target.value)}
-                          required
+                    <form className="registration" onSubmit={handleChange}>
+                        <ClearSharpIcon
+                          style={{
+                            height: '20px',
+                            width: '30px',
+                            left: '190px',
+                            position: 'relative',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleCancel}
                         />
-                        {errors.rollNumber && (
-                          <span className="error-message">
-                            {errors.rollNumber}
-                          </span>
-                        )}
-                      </div>
+                      <div className="typing-effect">
+                     <h1>Student Registration</h1>
+                     </div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        placeholder="ROLL NUMBER"
+                        id="rollNumber"
+                        name="rollNumber"
+                        value={rollNumber}
+                        onChange={(e) => setRollNumber(e.target.value)}
+                        required
+                      />
+                      {errors.rollNumber && (
+                        <span className="error-message">
+                          {errors.rollNumber}
+                        </span>
+                      )}
+                    </div>
+                    
 
-                      <div className="form-group">
-                        <label htmlFor="fullName">Name:</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={Name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                        />
-                      </div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        placeholder="NAME"
+                        id="name"
+                        name="name"
+                        value={Name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
 
-                      <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                        />
-                      </div>
-                      {/* <div className="form-group">
-                        <label htmlFor="otp">OTP:</label>
-                        <input type="text" id="otp" name="otp" value={formData.otp} onChange={handleChange} required />
-                        {errors.otp && <span className="error-message">{errors.otp}</span>}
-                      </div> */}
-                      <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input
-                          type="password"
-                          id="password"
-                          name="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          minLength={8}
-                          required
-                        />
-                        {errors.password && (
-                          <span className="error-message">
-                            {errors.password}
-                          </span>
-                        )}
-                      </div>
-                      {/* <div className="form-group">
-                        <label htmlFor="confirmPassword">
-                          Confirm Password:
-                        </label>
-                        <input
-                          type="password"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          value={formData.confirmPassword}
-                          onChange={handleChange}
-                          minLength={8}
-                          required
-                        />
-                        {errors.confirmPassword && (
-                          <span className="error-message">
-                            {errors.confirmPassword}
-                          </span>
-                        )}
-                      </div> */}
-                      <button type="reset" onClick={resetForm}>
-                        Reset
-                      </button>
-                      <button type="submit" onClick={handleChange}>
-                        Register
-                      </button>
-                      <button type="button" onClick={handleCancel}>
-                        {" "}
-                        Cancel{" "}
-                      </button>
-                    </form>
+                    <div className="input-field">
+                      <input
+                        type="email"
+                        placeholder="E-MAIL"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    {/* <div className="form-group">
+                      <label htmlFor="otp">OTP:</label>
+                      <input type="text" id="otp" name="otp" value={formData.otp} onChange={handleChange} required />
+                      {errors.otp && <span className="error-message">{errors.otp}</span>}
+                    </div> */}
+                  <div className="input-field">
+                      <input
+                        type="password"
+                        placeholder="PASSWORD"
+                        id="password"
+                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        minLength={8}
+                        required
+                      />
+                      {errors.password && (
+                        <span className="error-message">
+                          {errors.password}
+                        </span>
+                      )}
+                    </div>
+                    {/* <div className="form-group">
+                      <label htmlFor="confirmPassword">
+                        Confirm Password:
+                      </label>
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        minLength={8}
+                        required
+                      />
+                      {errors.confirmPassword && (
+                        <span className="error-message">
+                          {errors.confirmPassword}
+                        </span>
+                      )}
+                    </div> */}
+                
+                  <br/>
+                  <div className="action">
+                    <button type="reset" onClick={resetForm}>
+                      Reset
+                    </button>
+                    <button type="submit" onClick={handleChange}>
+                      Register
+                    </button>
+                    {/* <button type="button" onClick={handleCancel}>
+                      {" "}
+                      Cancel{" "}
+                    </button> */}
+                    </div>
+                  </form>
                   )}
                 </form>
               )}
@@ -417,8 +542,7 @@ function Nav() {
           </div>
         )}
       </div>
-    </nav>
-    
+    </>
   );
 }
 
