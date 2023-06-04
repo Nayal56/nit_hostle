@@ -12,6 +12,8 @@ import HostelRules from "./components/Home Page Components/Hostels/HostelRules";
 import StudentDashboard from "./components/Dashboards/Student/StudentDashboard";
 import HostelCard from "./components/Dashboards/Student/HostelCard";
 import RebaitForm from "./components/Dashboards/Student/Rebait Form";
+import HomeImage from "./components/HomeImage";
+import ProfileView from "./components/Dashboards/Student/ProfileView";
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
   return (
     <div className="App">
     <Routes>
-         {/* <Route path="/" element={ <StudentDashboard/> } /> */}
+         {/* <Route path="/" element={ <HomeImage/> } /> */}
       <Route path="/" element={<Home/>} />
         <Route
           exact
@@ -31,6 +33,8 @@ function App() {
         <Route path="/StudentDashboard" element={ <StudentDashboard/> } />
         <Route path="/HostelCard" element={<HostelCard/> } />
         <Route path="/RebaitForm" element={ <RebaitForm/> } />
+        <Route path="/ProfileView" element={<ProfileView/> } />
+
 
 
 

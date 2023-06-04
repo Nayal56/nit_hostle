@@ -30,7 +30,7 @@ import {useLocation} from 'react-router-dom';
 
 
 
-const StudentDashboard = () => {
+const StudentDashboard = (p) => {
   const [open, setOpen] = React.useState(false);
   const [darkMode, setDarkMode] = React.useState(false);
   const location = useLocation();
@@ -73,7 +73,6 @@ const StudentDashboard = () => {
          setEmail(data.email);
       })
       });
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -120,7 +119,7 @@ const StudentDashboard = () => {
 
          <Student sx={{ my: 2, color: 'Black', display: 'block' }}>
             <Typography variant="h6">
-              {location.state.rollNumber}
+            {location.state.rollNumber}
             </Typography>  
             </Student>
            
@@ -157,8 +156,8 @@ const StudentDashboard = () => {
             />
           </Box>
           <List>
-            <ListItem button component={Link} to="/Profile"
-            state={{rollnumber: location.state.rollNumber}}>
+            <ListItem button component={Link} to="/ProfileView"
+            state={{rollnumber: location.state.rollNumber,Name:name,department:department,year:year,contactnumber:contactNumber,bloodgroup:bloodGroup,fathername:fatherName,mothername:motherName,parentm:parentsMobileNumber,address:address,img:img,email:email,date1:date1}}>
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>

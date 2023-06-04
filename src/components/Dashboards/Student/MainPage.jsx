@@ -74,6 +74,7 @@ const Footer = styled(Box)({
 
 function MainPage(p) {
   const [name,setname] = useState("");
+  console.log(p.rollnumber);
   fetch(`http://localhost:5000/getname/${p.rollnumber}`
   ).then((res)=>{
     console.log("setname");
