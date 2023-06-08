@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./components/Home";
-import Dashboard from "./components/Dashboards/Dashboard"
 import { Route, Routes } from "react-router-dom";
 import Profile from "./components/Dashboards/Record/Profile";
 import Boys from "./components/Home Page Components/Hostels/Boys";
@@ -26,9 +25,8 @@ function App() {
         <Route
           exact
           path="/"
-          element={isLoggedIn == "true" ? <Dashboard /> : <Home />}
+          element={isLoggedIn == "true" ? <StudentDashboard /> : <Home />}
         />
-        <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/Profile" element={<Profile/> } />
         <Route path="/StudentDashboard" element={ <StudentDashboard/> } />
         <Route path="/HostelCard" element={<HostelCard/> } />

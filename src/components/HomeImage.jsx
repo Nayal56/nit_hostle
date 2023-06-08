@@ -27,17 +27,17 @@ const Container = styled('div')({
 });
 
 const CarouselContainer = styled('div')({
-  width: '1348px',
-  position: '',
+  width: '1300px',
+  position:'',
 });
 
 const CarouselImage = styled('img')({
-  width: '1345px',
-  height: '580px',
+  width: '1300px',
+  height: '545px',
 });
 
 const BoxContainer = styled(Box)({
-  width: '102%',
+  width: '90%',
   height: '100%',
   backgroundColor: '#FF0000',
   display: 'flex',

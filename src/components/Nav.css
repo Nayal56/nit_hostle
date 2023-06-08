@@ -40,15 +40,20 @@ body {
   transform: translateY(1px);
 }
 
-.logo {
-  margin-right: 10px;
+.logo1 {
+  margin-left: 26px;
+  margin-top: -220px;
+  position: relative;
+  width:90px;
+  top:155px;
+  left:-447px;
 }
 
-.logo img {
+.logo1 img {
   width: 100px;
   height: 100px;
-  margin-left: 90px;
-  margin-top: 14px;
+  margin-left: 436px;
+  margin-top: -137px;
 }
 
 

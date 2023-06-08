@@ -236,7 +236,7 @@ function Nav() {
         <div className="center-container">
           <HomeImage />
         </div>
-        <div className="logo">
+        <div className="logo1">
           <img src={logo} alt="Logo" />
         </div>
         <div>

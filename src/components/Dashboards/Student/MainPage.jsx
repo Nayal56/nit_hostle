@@ -2,12 +2,16 @@ import React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
+import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 
 
 const Header = styled(Box)({
   width: '69%',
   height: '8%',
-  backgroundColor: 'skyblue',
+  backgroundColor: '#696969',
   position: 'relative',
   padding: '47px',
   top: '1px',
@@ -18,22 +22,22 @@ const Header = styled(Box)({
 const MaintenanceBox = styled(Box)({
   width: '13.5%',
   height: '20%',
-        backgroundColor:'#FF0AF0',
+  backgroundColor:' #6F8792',
   position: 'fixed',
   right:'70%',
   top: '40%',
-  border: '2px solid black',
+  border: '.5px solid white',
   borderRadius: '20px',
 });
 
 const MessBillBox = styled(Box)({
   width: '13.5%',
   height: '20%',
-          backgroundColor:'#FF0AF0',
+  backgroundColor:' #6F8792',
   position: 'fixed',
   right:'55%',
   top: '40%',
-  border: '2px solid black',
+  border: '.5px solid white',
   borderRadius: '20px',
 
 });
@@ -41,29 +45,29 @@ const MessBillBox = styled(Box)({
 const OneBox = styled(Box)({
   width: '13.5%',
   height: '20%',
-          backgroundColor:'#FF0AF0',
+  backgroundColor:' #6F8792',
   position: 'fixed',  
   right:'40%',
   top: '40%',
-  border: '2px solid black',
+  border: '.5px solid white',
   borderRadius: '20px',
 });
 
 const TwoBox = styled(Box)({
   width: '13.5%',
   height: '20%',
-  backgroundColor:'#FF0AF0',
+  backgroundColor:' #6F8792',
   position: 'fixed',
   right:'25%',
   top: '40%',
-  border: '2px solid black',
+  border: '.5px solid white',
   borderRadius: '20px',
 });
 
 const Footer = styled(Box)({
   width: '69%',
   height: '1px',
-  backgroundColor: 'skyblue',
+  backgroundColor: '#696969',
   position: 'relative',
   padding: '47px',
   top: '340px',
@@ -74,7 +78,6 @@ const Footer = styled(Box)({
 
 function MainPage(p) {
   const [name,setname] = useState("");
-  console.log(p.rollnumber);
   fetch(`http://localhost:5000/getname/${p.rollnumber}`
   ).then((res)=>{
     console.log("setname");
@@ -90,25 +93,50 @@ function MainPage(p) {
           Welcome, {name}    
         </Typography>
       </Header>
-      <MaintenanceBox>
-          <Typography variant="h5">Maintenance</Typography>
-        </MaintenanceBox>
+    <MaintenanceBox>
+      <ConstructionIcon
+      style={{
+        width: '48px', // Adjust the desired width
+        height: '48px', // Adjust the desired height
+        color: 'red', // Adjust the desired color
+      }}
+    />  
+    <h4>Maintaince</h4>    
+
+    </MaintenanceBox>      
         <MessBillBox>
-          <Typography variant="h5">Mess Bill</Typography>
+        <AccountBalanceWalletRoundedIcon
+         style={{
+          width: '48px', // Adjust the desired width
+          height: '48px', // Adjust the desired height
+          color: 'red', // Adjust the desired color
+        }}
+        /> 
+        <h4>Mess Bill</h4>    
         </MessBillBox>
         <OneBox>
-          <Typography variant="h5">Box1</Typography>
+        <DepartureBoardIcon
+         style={{
+          width: '48px', // Adjust the desired width
+          height: '48px', // Adjust the desired height
+          color: 'red', // Adjust the desired color
+        }}
+        />
+        <h4>Rebate</h4>    
         </OneBox>
         <TwoBox>
-          <Typography variant="h5">Box2</Typography>
+        <ExitToAppRoundedIcon
+         style={{
+          width: '48px', // Adjust the desired width
+          height: '48px', // Adjust the desired height
+          color: 'red', // Adjust the desired color
+        }}
+        />        
+        <h4>No-Dues</h4>    
         </TwoBox>
         <Footer>
         <Typography variant="h5">******HOSTEL NAME******</Typography>
-        {/* <Typography variant="h5">Year:</Typography>
-        <Typography variant="h5">DOB:</Typography>
-        <Typography variant="h5">Blood Group:</Typography>
-        <Typography variant="h5">Address:</Typography> */}
-
+        
 
 
         </Footer>

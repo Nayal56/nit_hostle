@@ -14,7 +14,7 @@ function HostelCard() {
   const backRef = useRef();
   const location = useLocation();
 const Front = styled(Box)({
-    width: '50%',
+    width: '40%',
     height: '45%',
     backgroundColor: 'white',
     position: 'fixed',
@@ -25,7 +25,7 @@ const Front = styled(Box)({
   });
 
   const Back = styled(Box)({
-    width: '50%',
+    width: '40%',
     height: '45%',
     backgroundColor: 'white',
     position: 'fixed',
@@ -43,8 +43,8 @@ const Front = styled(Box)({
     <div>
       <div className='printpage'>
                 <Front ref={frontRef}>
-          <div className="logo" style={{ height: 'auto', width: '90px', position: 'relative' }}>
-            <img src={logo} alt="Logo" style={{ position: 'absolute', top: 20, left: -30 }} />
+          <div className="logo3" style={{ height: 'auto', width: '90px', position: 'relative' }}>
+            <img src={logo} alt="Logo" style={{ position: 'absolute', top: 26, left: 9,width:90 }} />
           </div>
 
           <h2 className="title">NATIONAL INSTITUTE OF TECHNOLOGY KURUKSHETRA</h2>

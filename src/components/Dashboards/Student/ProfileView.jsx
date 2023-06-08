@@ -22,7 +22,7 @@ const ProfileView = () => {
         </div>
     <div className="container">
       <div className="details">
-        <div className="logo">
+        <div className="logo2">
           <img src={logo} alt="Logo" />
         </div>
 
