@@ -15,21 +15,21 @@ function HostelCard() {
   const location = useLocation();
 const Front = styled(Box)({
     width: '40%',
-    height: '45%',
+    height: '40%',
     backgroundColor: 'white',
     position: 'fixed',
-    right: '25%',
-    top: '4%',
+    right: '29%',
+    top: '8%',
     border: '2px solid black',
     borderRadius: '20px',
   });
 
   const Back = styled(Box)({
     width: '40%',
-    height: '45%',
+    height: '40%',
     backgroundColor: 'white',
     position: 'fixed',
-    right: '25%',
+    right: '29%',
     top: '52%',
     border: '2px solid black',
     borderRadius: '20px',

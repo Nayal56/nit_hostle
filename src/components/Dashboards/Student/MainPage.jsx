@@ -6,6 +6,8 @@ import ConstructionIcon from '@mui/icons-material/Construction';
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
+import { Link } from 'react-router-dom';
+
 
 
 const Header = styled(Box)({
@@ -93,7 +95,10 @@ function MainPage(p) {
           Welcome, {name}    
         </Typography>
       </Header>
-    <MaintenanceBox>
+    <MaintenanceBox
+     component={Link} to= "/MaintainceForm"
+     style={{ textDecoration: 'none' }}
+     >
       <ConstructionIcon
       style={{
         width: '48px', // Adjust the desired width
@@ -101,7 +106,7 @@ function MainPage(p) {
         color: 'red', // Adjust the desired color
       }}
     />  
-    <h4>Maintaince</h4>    
+    <h4>Maintenance</h4>    
 
     </MaintenanceBox>      
         <MessBillBox>
@@ -114,7 +119,10 @@ function MainPage(p) {
         /> 
         <h4>Mess Bill</h4>    
         </MessBillBox>
-        <OneBox>
+        <OneBox 
+        component={Link} to= "/RebaitForm"
+        style={{ textDecoration: 'none' }}
+        >
         <DepartureBoardIcon
          style={{
           width: '48px', // Adjust the desired width
@@ -124,7 +132,12 @@ function MainPage(p) {
         />
         <h4>Rebate</h4>    
         </OneBox>
-        <TwoBox>
+        <TwoBox 
+        component="a" 
+        href="https://nitkkr.ac.in/wp-content/uploads/2021/12/No-Dues-form-Latest-05062020.pdf" 
+        target="_blank"
+        style={{ textDecoration: 'none' }}
+        >
         <ExitToAppRoundedIcon
          style={{
           width: '48px', // Adjust the desired width

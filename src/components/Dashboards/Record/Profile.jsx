@@ -3,7 +3,7 @@ import "./Profile.css";
 import { useLocation } from "react-router-dom";
 import { Troubleshoot } from '@mui/icons-material';
 
-const departments = ['Department 1', 'Department 2', 'Department 3']; // Replace with actual department options
+const departments = ['Btech', 'Mtech', 'MCA','MBA','Phd']; // Replace with actual department options
 const years = ['Year 1', 'Year 2', 'Year 3']; // Replace with actual year options
 const bloodGroups = ['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'O-', 'AB-']; // Replace with actual blood group options
 
@@ -99,7 +99,9 @@ const Profile = () => {
   };
 
   return(
+    <div className='profile-form'>
     <form onSubmit={handleSubmit} className="registration-form">
+      <h3>Profile Update</h3>
       <label>
         Department:
         <select value={department} onChange={(e) => setDepartment(e.target.value)}>
@@ -197,6 +199,7 @@ const Profile = () => {
       <br/>
       <button type="submit">Submit</button>
     </form>
+    </div>
   );
 };
 

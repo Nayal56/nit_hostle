@@ -13,6 +13,7 @@ import HostelCard from "./components/Dashboards/Student/HostelCard";
 import RebaitForm from "./components/Dashboards/Student/Rebait Form";
 import HomeImage from "./components/HomeImage";
 import ProfileView from "./components/Dashboards/Student/ProfileView";
+import MaintenanceForm from "./components/Dashboards/Student/MaintainceForm";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/HostelCard" element={<HostelCard/> } />
         <Route path="/RebaitForm" element={ <RebaitForm/> } />
         <Route path="/ProfileView" element={<ProfileView/> } />
+        <Route path="/MaintainceForm" element={<MaintenanceForm/> } />
 
 
 

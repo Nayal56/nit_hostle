@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 const ProfileView = () => {
   const location = useLocation();
  const rollnumber = location.state.rollnumber;
+ console.log(rollnumber);
   const handlePrint = () => {
     window.print();
   };

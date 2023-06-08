@@ -105,7 +105,7 @@ const StudentDashboard = (p) => {
       <AppBar
         position="static"
         color={darkMode ? "default" : "primary"}
-        style={{ background: darkMode ? "#424242" : "wheat" }}
+        style={{ background: darkMode ? "rgba(255, 255, 0, 0.2)" : "#424242" }}
       >
         <Toolbar>
           <IconButton color="inherit" onClick={handleDrawerOpen}>
@@ -130,7 +130,7 @@ const StudentDashboard = (p) => {
           sx={{
             width: 250,
             backdropFilter: "blur(8px)",
-            background: darkMode ? "#424242" : "wheat",
+            background: darkMode ? "rgba(255, 255, 0, 0.2)" : "#424242",
             color: "white",
             height: "100vh",
             position: "fixed",
@@ -163,11 +163,11 @@ const StudentDashboard = (p) => {
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem button>
+            <ListItem button component={Link} to= "/MaintainceForm">
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>
-              <ListItemText primary="Account" />
+              <ListItemText primary="Maintenance" />
             </ListItem>
             <ListItem button component={Link} to= "/HostelCard"
             state={{rollnumber: location.state.rollNumber,Name:name,department:department,year:year,contactnumber:contactNumber,bloodgroup:bloodGroup,fathername:fatherName,mothername:motherName,parentm:parentsMobileNumber,address:address,img:img,email:email,date1:date1}}>
@@ -180,7 +180,7 @@ const StudentDashboard = (p) => {
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>
-              <ListItemText primary="Apply for Rebait" />
+              <ListItemText primary="Apply for Rebate" />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
